@@ -1,3 +1,7 @@
+package ui;
+
+import model.BookingSystem;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,18 +48,18 @@ public class Main {
                                 Map<String, PriorityQueue<Date>> economyClass, int passengerId, String seat, Date date) {
         // Check if seat exists and is available in the corresponding class
         if (seat.charAt(0) == '1' && !firstClass.containsKey(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " does not exist");
+            System.out.println("model.Booking failed: model.Seat " + seat + " does not exist");
         } else if (seat.charAt(0) == '2' && !businessClass.containsKey(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " does not exist");
+            System.out.println("model.Booking failed: model.Seat " + seat + " does not exist");
         } else if (seat.charAt(0) == '3' && !economyClass.containsKey(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " does not exist");
+            System.out.println("model.Booking failed: model.Seat " + seat + " does not exist");
         } else if (seat.charAt(0) == '1' && !firstClass.get(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " is already booked");
+            System.out.println("model.Booking failed: model.Seat " + seat + " is already booked");
         } else if (seat.charAt(0) == '2' && !businessClass.get(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " is already booked");
+            System.out.println("model.Booking failed: model.Seat " + seat + " is already booked");
         } else if (seat.charAt(0) == '3' && !economyClass.get(seat).isEmpty() &&
                 date.compareTo(economyClass.get(seat).peek()) >= 0) {
-            System.out.println("Booking failed: Seat " + seat + " is already booked for a later date");
+            System.out.println("model.Booking failed: model.Seat " + seat + " is already booked for a later date");
         } else {
             // Book the seat
             if (seat.charAt(0) == '1') {
@@ -67,7 +71,7 @@ public class Main {
             }
 
             // Print confirmation message
-            System.out.println("Seat " + seat + " booked for passenger " + passengerId);
+            System.out.println("model.Seat " + seat + " booked for passenger " + passengerId);
         }
     }
 }

@@ -1,9 +1,10 @@
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.PriorityQueue;
+package model;
 
-// Passenger class to store a linked list of bookings for a passenger
+import model.Booking;
+
+import java.util.LinkedList;
+
+// model.Passenger class to store a linked list of bookings for a passenger
 public class Passenger {
     private int passengerId;
     private LinkedList<Booking> bookings;

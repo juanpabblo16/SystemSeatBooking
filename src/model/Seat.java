@@ -1,11 +1,15 @@
+package model;
+
+import model.Booking;
+
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-// Seat class to store a linked list or priority queue of bookings for a seat, depending on the seat type
+// model.Seat class to store a linked list or priority queue of bookings for a seat, depending on the seat type
 public class Seat {
     private String seatNumber;
     private SeatType seatType;
-    private Object bookings; // can be a LinkedList<Booking> or a PriorityQueue<Booking> depending on the seat type
+    private Object bookings; // can be a LinkedList<model.Booking> or a PriorityQueue<model.Booking> depending on the seat type
 
     public Seat(String seatNumber, SeatType seatType) {
         this.seatNumber = seatNumber;
