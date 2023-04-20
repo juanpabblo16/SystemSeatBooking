@@ -1,4 +1,4 @@
-# Flight Booking System
+## Flight Booking System
 
 This is a simple Flight Booking System implemented in Java using hash tables. The system allows users to book and cancel seats in different classes of an airplane, and also displays the current reservations.
 ---
