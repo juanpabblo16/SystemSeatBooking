@@ -141,8 +141,8 @@ public class BookingSystem {
     }
 
     // Method to cancel a booking for a passenger
-    public static void cancelBooking(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
-                                     Map<String, PriorityQueue<Date>> economyClass, int passengerId, String seat) {
+    public static boolean cancelBooking(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
+                                        Map<String, PriorityQueue<Date>> economyClass, String passengerId, String seat) {
         // Check if seat exists and is booked by the passenger
         boolean found = false;
         if (seat.charAt(0) == '1' && !firstClass.containsKey(seat)) {
@@ -169,7 +169,7 @@ public class BookingSystem {
                     Iterator<Date> iterator = dates.iterator();
                     while (iterator.hasNext()) {
                         Date next = iterator.next();
-                        if (next.getTime() == passengerId) {
+                        if (next.getTime() == Long.parseLong(passengerId)) {
                             iterator.remove();
                             found = true;
                             break;
@@ -185,6 +185,7 @@ public class BookingSystem {
                 }
             }
         }
+        return found;
     }
 
     // Helper method to remove a booking from a passenger's list of bookings

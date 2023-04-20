@@ -44,7 +44,7 @@ public class Main {
                     long travelDate = scanner.nextLong();
 
                     // Book the seat
-                    BookingSystem.bookSeat(firstClass, businessClass, economyClass, new Date(travelDate).getTime(), seatNumber, seatClass);
+                    //BookingSystem.bookSeat(firstClass, businessClass, economyClass, new Date(travelDate).getTime(), seatNumber, seatClass);
                     System.out.println("Seat booked for " + passengerName + "!");
 
                     break;
@@ -64,11 +64,14 @@ public class Main {
                         System.out.println("Invalid class choice!");
                         break;
                     }
-                    System.out.println("Enter seat number (e.g. 1A):");
+                    System.out.println("Enter seat number (e.g. 1A):"+"\n");
                     String cancelSeatNumber = scanner.next();
 
                     // Cancel the booking
-                    boolean success = BookingSystem.cancelBooking(firstClass, businessClass, economyClass, cancelSeatClass, cancelSeatNumber);
+                    System.out.println("Enter the user id");
+                    String passengerId = scanner.next();
+                    boolean success = BookingSystem.cancelBooking(firstClass, businessClass, economyClass, passengerId, cancelSeatClass + cancelSeatNumber);
+
                     if (success) {
                         System.out.println("Booking cancelled!");
                     } else {
