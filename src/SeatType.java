@@ -1,6 +1,6 @@
 // Enum to represent the different types of seats
 public enum SeatType {
-    ECONOMY,
-    STANDARD,
+    ECONOMY_CLASS,
+    BUSINESS_CLASS,
     FIRST_CLASS
 }

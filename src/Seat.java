@@ -15,7 +15,10 @@ public class Seat {
         } else {
             this.bookings = new LinkedList<Booking>();
         }
+
     }
+
+
 
     public String getSeatNumber() {
         return seatNumber;
