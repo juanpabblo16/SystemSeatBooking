@@ -30,6 +30,11 @@ Esto generará un archivo de imagen PNG con el mismo nombre del archivo PlantUML
 
 Si encuentras errores o tienes sugerencias para mejorar este sistema de reservación de sillas en avión, te invitamos a contribuir abriendo un problema en el repositorio o enviando una solicitud de extracción (pull request). Tu contribución es bienvenida y ayudará a mejorar el proyecto.
 
+## Autores
+
+- Juan Pablo Acevedo
+- Carlos tafur
+
 ## Licencia
 
 Este proyecto está bajo la Licencia de StudentSource, lo que significa que puedes usar, copiar, modificar y distribuir el código de acuerdo a los términos de dicha licencia. 
