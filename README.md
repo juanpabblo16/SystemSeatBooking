@@ -1,20 +1,35 @@
-## Flight Booking System
+# Sistema de Reservación de Sillas en Avión
 
-This is a simple Flight Booking System implemented in Java using hash tables. The system allows users to book and cancel seats in different classes of an airplane, and also displays the current reservations.
----
-### Authors
-Juan Pablo Acevedo
----
-### Language and IDE
-- Java
-- IntelliJ IDEA
----
-### Prerequisites
-Java Development Kit (JDK) version 8 or later
----
-### How to run the project
-1. Clone the repository to your local machine.
-2. Open the project in your preferred Java IDE.
-3. Run the Main.java file to execute the program.
+Este es un sistema de reservación de sillas en un avión desarrollado en PlantUML, que incluye clases para representar el avión, las sillas, los pasajeros, las clases de sillas (económica, estándar, primera clase) y las reservas.
 
-When the program is running, you can follow the prompts in the console to book and cancel seats, and display the current reservations. The program uses hash tables to store the reservations for each seat class. The SeatClass enum defines the different classes (First Class, Business Class, and Economy Class), and the seat maps are implemented as hash tables with the seat number as the key and a Boolean value indicating whether the seat is available or booked. For the Economy Class, a priority queue is used to store the booking dates for each seat, so that they can be sorted chronologically.
+## Requisitos
+
+- [Java](https://www.java.com/): El código generado en PlantUML está en Java, por lo que se requiere tener instalado el JDK de Java en tu sistema para poder compilar y ejecutar el código generado.
+
+- [PlantUML](https://plantuml.com/): Es una herramienta de código abierto para la creación de diagramas UML, incluyendo diagramas de clases. Debe estar instalada en tu sistema para poder generar las representaciones gráficas a partir del código PlantUML.
+
+- IDE de tu elección: Para compilar y ejecutar el código Java, necesitarás un entorno de desarrollo integrado (IDE) de tu elección, como Eclipse, IntelliJ IDEA, NetBeans, etc.
+
+## Cómo usar
+
+1. Clona este repositorio en tu cuenta de GitHub o descárgalo como archivo ZIP y descomprímelo en tu computadora.
+
+2. Abre el archivo `diagrama-de-clases.puml` con PlantUML para visualizar el diagrama de clases en formato gráfico.
+
+3. Puedes modificar el código PlantUML en el archivo `diagrama-de-clases.puml` según tus necesidades para adaptarlo a tu sistema o problema específico.
+
+4. Si deseas generar una nueva representación gráfica del diagrama de clases, puedes hacerlo utilizando PlantUML. Por ejemplo, puedes usar la siguiente línea de comando en la terminal para generar una imagen PNG del diagrama:
+
+plantuml diagrama-de-clases.puml
+
+Esto generará un archivo de imagen PNG con el mismo nombre del archivo PlantUML (`diagrama-de-clases.png`) en el mismo directorio.
+
+5. Utiliza tu IDE de elección para compilar y ejecutar el código Java generado en tus propios proyectos o sistemas.
+
+## Contribuciones
+
+Si encuentras errores o tienes sugerencias para mejorar este sistema de reservación de sillas en avión, te invitamos a contribuir abriendo un problema en el repositorio o enviando una solicitud de extracción (pull request). Tu contribución es bienvenida y ayudará a mejorar el proyecto.
+
+## Licencia
+
+Este proyecto está bajo la Licencia de StudentSource, lo que significa que puedes usar, copiar, modificar y distribuir el código de acuerdo a los términos de dicha licencia. 
