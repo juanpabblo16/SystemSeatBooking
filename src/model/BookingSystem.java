@@ -1,22 +1,25 @@
 package model;
 
 import model.Booking;
+import structure.MyHashMap;
 
 import java.util.*;
 
 // model.BookingSystem class to manage the bookings using hash tables
 public class BookingSystem {
     private HashMap<String, Seat> seatMap;
+    private MyHashMap<String, Seat> seatMap1;
     private HashMap<Integer, Passenger> passengerMap;
+    private MyHashMap<Integer, Passenger> passengerMap1;
 
     public BookingSystem() {
-        this.seatMap = new HashMap<String, Seat>();
-        this.passengerMap = new HashMap<Integer, Passenger>();
+        this.seatMap1 = new MyHashMap<String, Seat>();
+        this.passengerMap1 = new MyHashMap<Integer, Passenger>();
     }
 
     // Method to book a seat for a passenger
     public void bookSeat(int passengerId, String seatNumber, Date date) {
-        Seat seat = seatMap.get(seatNumber);
+        Seat seat = seatMap1.get(seatNumber);
         if (seat != null) {
             Booking booking = new Booking(passengerId, seatNumber, date);
             if (seat.getSeatType() == SeatType.FIRST_CLASS) {
@@ -27,10 +30,10 @@ public class BookingSystem {
                 bookings.add(booking);
             }
 
-            Passenger passenger = passengerMap.get(passengerId);
+            Passenger passenger = passengerMap1.get(passengerId);
             if (passenger == null) {
                 passenger = new Passenger(passengerId);
-                passengerMap.put(passengerId, passenger);
+                passengerMap1.put(passengerId, passenger);
             }
             passenger.getBookings().add(booking);
 
@@ -134,7 +137,7 @@ public class BookingSystem {
 
     // Helper method to remove a booking from a passenger's list of bookings
     private void removeBookingFromPassenger(Booking booking) {
-        Passenger passenger = passengerMap.get(booking.getPassengerId());
+        Passenger passenger = passengerMap1.get(booking.getPassengerId());
         if (passenger != null) {
             passenger.getBookings().remove(booking);
         }
