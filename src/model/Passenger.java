@@ -3,7 +3,7 @@ package model;
 import model.Booking;
 import structure.MyLinkedList;
 
-import java.util.LinkedList;
+
 
 // model.Passenger class to store a linked list of bookings for a passenger
 public class Passenger {

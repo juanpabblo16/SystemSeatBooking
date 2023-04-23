@@ -35,7 +35,7 @@ public class BookingSystem {
                 passenger = new Passenger(passengerId);
                 passengerMap1.put(passengerId, passenger);
             }
-            passenger.getBookings().add(booking);
+            passenger.getBookings().add(booking.getPassengerId(), booking);
 
             System.out.println("model.Booking successful: model.Passenger " + passengerId + " booked seat " + seatNumber);
         } else {
@@ -139,7 +139,7 @@ public class BookingSystem {
     private void removeBookingFromPassenger(Booking booking) {
         Passenger passenger = passengerMap1.get(booking.getPassengerId());
         if (passenger != null) {
-            passenger.getBookings().remove(booking);
+            passenger.getBookings().remove(booking.getPassengerId());
         }
     }
 }
