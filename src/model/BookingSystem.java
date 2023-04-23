@@ -2,14 +2,14 @@ package model;
 
 import model.Booking;
 import structure.MyHashMap;
+import structure.MyLinkedList;
+import structure.MyPriorityQueue;
 
 import java.util.*;
 
 // model.BookingSystem class to manage the bookings using hash tables
 public class BookingSystem {
-    private HashMap<String, Seat> seatMap;
     private MyHashMap<String, Seat> seatMap1;
-    private HashMap<Integer, Passenger> passengerMap;
     private MyHashMap<Integer, Passenger> passengerMap1;
 
     public BookingSystem() {
@@ -23,11 +23,11 @@ public class BookingSystem {
         if (seat != null) {
             Booking booking = new Booking(passengerId, seatNumber, date);
             if (seat.getSeatType() == SeatType.FIRST_CLASS) {
-                PriorityQueue<Booking> bookings = (PriorityQueue<Booking>) seat.getBookings();
+                MyPriorityQueue<Booking> bookings = (MyPriorityQueue<Booking>) seat.getBookings();
                 bookings.add(booking);
             } else {
-                LinkedList<Booking> bookings = (LinkedList<Booking>) seat.getBookings();
-                bookings.add(booking);
+                MyLinkedList<Booking> bookings = (MyLinkedList<Booking>) seat.getBookings();
+                bookings.add(Integer.parseInt(booking.getSeatNumber()),booking);
             }
 
             Passenger passenger = passengerMap1.get(passengerId);

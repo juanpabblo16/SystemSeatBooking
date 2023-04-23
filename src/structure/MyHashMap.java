@@ -1,10 +1,10 @@
 package structure;
 
-import static java.util.Objects.hash;
+
 
 public class MyHashMap<K, V> {
 
-    private static final int DEFAULT_CAPACITY = 16;
+    private static final int DEFAULT_CAPACITY = 54;
     private static final float LOAD_FACTOR = 0.75f;
 
     private int size;

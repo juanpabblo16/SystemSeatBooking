@@ -8,7 +8,7 @@ public class MyPriorityQueue<E> {
     private int size;
     private E[] elements;
 
-    private static final int DEFAULT_CAPACITY = 16;
+    private static final int DEFAULT_CAPACITY = 54;
 
     public MyPriorityQueue(Comparator<E> comparator) {
         this.comparator = comparator;
