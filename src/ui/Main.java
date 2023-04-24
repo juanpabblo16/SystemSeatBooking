@@ -1,3 +1,8 @@
+package ui;
+
+import model.BookingSystem;
+import model.SeatType;
+
 import java.util.*;
 
 public class Main {
@@ -44,8 +49,8 @@ public class Main {
                     long travelDate = scanner.nextLong();
 
                     // Book the seat
-                    //BookingSystem.bookSeat(firstClass, businessClass, economyClass, new Date(travelDate).getTime(), seatNumber, seatClass);
-                    System.out.println("Seat booked for " + passengerName + "!");
+                    //model.BookingSystem.bookSeat(firstClass, businessClass, economyClass, new Date(travelDate).getTime(), seatNumber, seatClass);
+                    System.out.println("model.Seat booked for " + passengerName + "!");
 
                     break;
 
@@ -73,9 +78,9 @@ public class Main {
                     boolean success = BookingSystem.cancelBooking(firstClass, businessClass, economyClass, passengerId, cancelSeatClass + cancelSeatNumber);
 
                     if (success) {
-                        System.out.println("Booking cancelled!");
+                        System.out.println("model.Booking cancelled!");
                     } else {
-                        System.out.println("Seat not found or already available!");
+                        System.out.println("model.Seat not found or already available!");
                     }
 
                     break;

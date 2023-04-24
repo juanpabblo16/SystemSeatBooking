@@ -1,6 +1,8 @@
+package model;
+
 import java.util.Date;
 
-// Booking class to store the passenger ID and seat number for a booking
+// model.Booking class to store the passenger ID and seat number for a booking
 public class Booking {
     private int passengerId;
     private String seatNumber;

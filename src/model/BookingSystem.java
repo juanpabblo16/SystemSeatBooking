@@ -1,6 +1,9 @@
+package model;
+
+
 import java.util.*;
 
-// BookingSystem class to manage the bookings using hash tables
+// model.BookingSystem class to manage the bookings using hash tables
 public class BookingSystem {
     private HashMap<String, Seat> seatMap;
     private HashMap<Integer, Passenger> passengerMap;
@@ -30,9 +33,9 @@ public class BookingSystem {
             }
             passenger.getBookings().add(booking);
 
-            System.out.println("Booking successful: Passenger " + passengerId + " booked seat " + seatNumber);
+            System.out.println("model.Booking successful: model.Passenger " + passengerId + " booked seat " + seatNumber);
         } else {
-            System.out.println("Booking failed: Seat " + seatNumber + " does not exist");
+            System.out.println("model.Booking failed: model.Seat " + seatNumber + " does not exist");
         }
     }
 
@@ -40,18 +43,18 @@ public class BookingSystem {
                                 Map<String, PriorityQueue<Date>> economyClass, int passengerId, String seat, Date date) {
         // Check if seat exists and is available in the corresponding class
         if (seat.charAt(0) == '1' && !firstClass.containsKey(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " does not exist");
+            System.out.println("model.Booking failed: model.Seat " + seat + " does not exist");
         } else if (seat.charAt(0) == '2' && !businessClass.containsKey(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " does not exist");
+            System.out.println("model.Booking failed: model.Seat " + seat + " does not exist");
         } else if (seat.charAt(0) == '3' && !economyClass.containsKey(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " does not exist");
+            System.out.println("model.Booking failed: model.Seat " + seat + " does not exist");
         } else if (seat.charAt(0) == '1' && !firstClass.get(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " is already booked");
+            System.out.println("model.Booking failed: model.Seat " + seat + " is already booked");
         } else if (seat.charAt(0) == '2' && !businessClass.get(seat)) {
-            System.out.println("Booking failed: Seat " + seat + " is already booked");
+            System.out.println("model.Booking failed: model.Seat " + seat + " is already booked");
         } else if (seat.charAt(0) == '3' && !economyClass.get(seat).isEmpty() &&
                 date.compareTo(economyClass.get(seat).peek()) >= 0) {
-            System.out.println("Booking failed: Seat " + seat + " is already booked for a later date");
+            System.out.println("model.Booking failed: model.Seat " + seat + " is already booked for a later date");
         } else {
             // Book the seat
             if (seat.charAt(0) == '1') {
@@ -63,7 +66,7 @@ public class BookingSystem {
             }
 
             // Print confirmation message
-            System.out.println("Seat " + seat + " booked for passenger " + passengerId);
+            System.out.println("model.Seat " + seat + " booked for passenger " + passengerId);
         }
 
     }
@@ -146,18 +149,18 @@ public class BookingSystem {
         // Check if seat exists and is booked by the passenger
         boolean found = false;
         if (seat.charAt(0) == '1' && !firstClass.containsKey(seat)) {
-            System.out.println("Cancellation failed: Seat " + seat + " does not exist");
+            System.out.println("Cancellation failed: model.Seat " + seat + " does not exist");
         } else if (seat.charAt(0) == '2' && !businessClass.containsKey(seat)) {
-            System.out.println("Cancellation failed: Seat " + seat + " does not exist");
+            System.out.println("Cancellation failed: model.Seat " + seat + " does not exist");
         } else if (seat.charAt(0) == '3' && !economyClass.containsKey(seat)) {
-            System.out.println("Cancellation failed: Seat " + seat + " does not exist");
+            System.out.println("Cancellation failed: model.Seat " + seat + " does not exist");
         } else {
             if (seat.charAt(0) == '1' && firstClass.get(seat)) {
-                System.out.println("Cancellation failed: Seat " + seat + " is not booked");
+                System.out.println("Cancellation failed: model.Seat " + seat + " is not booked");
             } else if (seat.charAt(0) == '2' && businessClass.get(seat)) {
-                System.out.println("Cancellation failed: Seat " + seat + " is not booked");
+                System.out.println("Cancellation failed: model.Seat " + seat + " is not booked");
             } else if (seat.charAt(0) == '3' && economyClass.get(seat).isEmpty()) {
-                System.out.println("Cancellation failed: Seat " + seat + " is not booked");
+                System.out.println("Cancellation failed: model.Seat " + seat + " is not booked");
             } else {
                 // Cancel the booking
                 if (seat.charAt(0) == '1') {
@@ -176,12 +179,12 @@ public class BookingSystem {
                         }
                     }
                     if (!found) {
-                        System.out.println("Cancellation failed: Passenger " + passengerId + " did not book seat " + seat);
+                        System.out.println("Cancellation failed: model.Passenger " + passengerId + " did not book seat " + seat);
                     }
                 }
                 if (found) {
                     // Print confirmation message
-                    System.out.println("Booking cancelled for passenger " + passengerId + " on seat " + seat);
+                    System.out.println("model.Booking cancelled for passenger " + passengerId + " on seat " + seat);
                 }
             }
         }
