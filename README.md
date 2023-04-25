@@ -1,2 +1,26 @@
-# AirlineTry3
-Alternative branch, where is missing the GUI and Hash Structure
+# Airline Reservation System
+
+This is a Java-based command-line application that simulates an airline reservation system. It was developed by Juan Pablo Acevedo and Carlos Andres Tafurt as part of their undergraduate systems engineering coursework.
+
+## Description
+
+The Airline Reservation System allows passengers to book seats on a flight, cancel bookings, and view available seats. It supports three classes of seats: First Class, Business Class, and Economy Class. Bookings are stored in memory using Java Maps and PriorityQueues.
+
+## Prerequisites
+
+To run the Airline Reservation System, you will need the following:
+
+- Java Development Kit (JDK) 8 or higher
+- An IDE that supports Java, such as IntelliJ IDEA or Eclipse
+
+## Usage
+
+1. Clone the repository to your local machine.
+2. Open the project in your preferred IDE.
+3. Run the `Main` class to start the application.
+4. Follow the on-screen instructions to interact with the system.
+
+## Contributors
+
+- Juan Pablo Acevedo
+- Carlos Andres Tafurt
