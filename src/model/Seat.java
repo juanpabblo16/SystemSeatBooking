@@ -1,6 +1,8 @@
 package model;
 
 
+import model.Booking;
+
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
@@ -22,6 +24,9 @@ public class Seat {
     }
 
 
+
+
+    }
 
     public String getSeatNumber() {
         return seatNumber;
