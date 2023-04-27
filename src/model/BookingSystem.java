@@ -1,5 +1,6 @@
 package model;
 
+
 import model.Booking;
 
 import java.util.*;
@@ -15,6 +16,35 @@ public class BookingSystem {
     }
 
     // Method to book a seat for a passenger
+    public static void bookSeat(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass, Map<String, PriorityQueue<Date>> economyClass, long travelDate, String seatNumber, SeatType seatClass) {
+        // Check if seat is already booked
+        boolean found = false;
+        if (seatClass == SeatType.FIRST_CLASS && firstClass.containsKey(seatNumber) && !firstClass.get(seatNumber)) {
+            found = true;
+        } else if (seatClass == SeatType.BUSINESS_CLASS && businessClass.containsKey(seatNumber) && !businessClass.get(seatNumber)) {
+            found = true;
+        } else if (seatClass == SeatType.ECONOMY_CLASS && economyClass.containsKey(seatNumber) && !economyClass.get(seatNumber).isEmpty()) {
+            found = true;
+        }
+        if (found) {
+            System.out.println("Seat " + seatNumber + " is already booked for the travel date " + new Date(travelDate));
+        } else {
+            if (seatClass == SeatType.FIRST_CLASS) {
+                firstClass.put(seatNumber, false);
+                System.out.println("model.Seat " + seatNumber + " in First Class is booked for the travel date " + new Date(travelDate));
+            } else if (seatClass == SeatType.BUSINESS_CLASS) {
+                businessClass.put(seatNumber, false);
+                System.out.println("model.Seat " + seatNumber + " in Business Class is booked for the travel date " + new Date(travelDate));
+            } else if (seatClass == SeatType.ECONOMY_CLASS) {
+                PriorityQueue<Date> dates = economyClass.getOrDefault(seatNumber, new PriorityQueue<Date>());
+                dates.add(new Date(travelDate));
+                economyClass.put(seatNumber, dates);
+                System.out.println("model.Seat " + seatNumber + " in Economy Class is booked for the travel date " + new Date(travelDate));
+            }
+        }
+    }
+
+
     public void bookSeat(int passengerId, String seatNumber, Date date) {
         Seat seat = seatMap.get(seatNumber);
         if (seat != null) {
@@ -84,6 +114,41 @@ public class BookingSystem {
         }
     }
 
+    public static void initializeSeats(Map<String, Boolean> firstClass,
+                                       Map<String, Boolean> businessClass,
+                                       Map<String, PriorityQueue<Date>> economyClass) {
+        // First class
+        for (int i = 1; i <= 5; i++) {
+            for (char j = 'A'; j <= 'F'; j++) {
+                String seatNumber = i + "" + j;
+                firstClass.put(seatNumber, false);
+            }
+        }
+
+        // Business class
+        for (int i = 6; i <= 15; i++) {
+            for (char j = 'A'; j <= 'F'; j++) {
+                String seatNumber = i + "" + j;
+                businessClass.put(seatNumber, false);
+            }
+        }
+
+        // Economy class
+        for (int i = 16; i <= 30; i++) {
+            for (char j = 'A'; j <= 'F'; j++) {
+                String seatNumber = i + "" + j;
+                economyClass.put(seatNumber, new PriorityQueue<Date>());
+            }
+        }
+    }
+
+    // Method to cancel a booking for a passenger
+    public static boolean cancelBooking(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
+                                        Map<String, PriorityQueue<Date>> economyClass, String passengerId, String seat) {
+        boolean cancelled = false;
+
+        // Check if seat exists and is booked by the passenger
+
     // Method to cancel a booking for a passenger
     public static void cancelBooking(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
                                      Map<String, PriorityQueue<Date>> economyClass, int passengerId, String seat) {
@@ -106,6 +171,11 @@ public class BookingSystem {
                 // Cancel the booking
                 if (seat.charAt(0) == '1') {
                     firstClass.put(seat, true);
+                    cancelled = true;
+                } else if (seat.charAt(0) == '2') {
+                    businessClass.put(seat, true);
+                    cancelled = true;
+
                 } else if (seat.charAt(0) == '2') {
                     businessClass.put(seat, true);
                 } else if (seat.charAt(0) == '3') {
@@ -113,6 +183,17 @@ public class BookingSystem {
                     Iterator<Date> iterator = dates.iterator();
                     while (iterator.hasNext()) {
                         Date next = iterator.next();
+                        if (next.getTime() == Long.parseLong(passengerId)) {
+                            iterator.remove();
+                            cancelled = true;
+                            break;
+                        }
+                    }
+                    if (!cancelled) {
+                        System.out.println("Cancellation failed: model.Passenger " + passengerId + " did not book seat " + seat);
+                    }
+                }
+                if (cancelled) {
                         if (next.getTime() == passengerId) {
                             iterator.remove();
                             found = true;
@@ -129,6 +210,9 @@ public class BookingSystem {
                 }
             }
         }
+        return cancelled;
+
+
     }
 
 

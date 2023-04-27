@@ -1,5 +1,6 @@
 package model;
 
+
 import model.Booking;
 
 import java.util.LinkedList;
@@ -19,6 +20,12 @@ public class Seat {
         } else {
             this.bookings = new LinkedList<Booking>();
         }
+
+    }
+
+
+
+
     }
 
     public String getSeatNumber() {
