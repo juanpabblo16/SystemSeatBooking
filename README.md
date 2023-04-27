@@ -11,8 +11,6 @@ The Airline Reservation System allows passengers to book seats on a flight, canc
 
 - Java](https://www.java.com/): The code generated in PlantUML is in Java, so you need to have the Java JDK installed on your system to be able to compile and run the generated code.
 
-- PlantUML](https://plantuml.com/): Is an open source tool for creating UML diagrams, including class diagrams. It must be installed on your system to be able to generate the graphical representations from PlantUML code.
-
 - IDE of your choice: To compile and run the Java code, you will need an integrated development environment (IDE) of your choice, such as Eclipse, IntelliJ IDEA, NetBeans, etc.
 
 ## Usage
