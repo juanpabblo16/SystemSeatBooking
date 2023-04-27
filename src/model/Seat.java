@@ -23,11 +23,6 @@ public class Seat {
 
     }
 
-
-
-
-    }
-
     public String getSeatNumber() {
         return seatNumber;
     }
