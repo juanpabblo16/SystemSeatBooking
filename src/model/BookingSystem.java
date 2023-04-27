@@ -44,32 +44,6 @@ public class BookingSystem {
         }
     }
 
-
-    public void bookSeat(int passengerId, String seatNumber, Date date) {
-        Seat seat = seatMap.get(seatNumber);
-        if (seat != null) {
-            Booking booking = new Booking(passengerId, seatNumber, date);
-            if (seat.getSeatType() == SeatType.FIRST_CLASS) {
-                PriorityQueue<Booking> bookings = (PriorityQueue<Booking>) seat.getBookings();
-                bookings.add(booking);
-            } else {
-                LinkedList<Booking> bookings = (LinkedList<Booking>) seat.getBookings();
-                bookings.add(booking);
-            }
-
-            Passenger passenger = passengerMap.get(passengerId);
-            if (passenger == null) {
-                passenger = new Passenger(passengerId);
-                passengerMap.put(passengerId, passenger);
-            }
-            passenger.getBookings().add(booking);
-
-            System.out.println("model.Booking successful: model.Passenger " + passengerId + " booked seat " + seatNumber);
-        } else {
-            System.out.println("model.Booking failed: model.Seat " + seatNumber + " does not exist");
-        }
-    }
-
     public static void displayCurrentReservations(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
                                                   Map<String, PriorityQueue<Date>> economyClass) {
         // Print header
