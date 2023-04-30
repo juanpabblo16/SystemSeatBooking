@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="javafx-sdk-20.0">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/openjfx-20.0.1_windows-x64_bin-sdk (1)/javafx-sdk-20.0.1" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/openjfx-20.0.1_windows-x64_bin-sdk (1)/javafx-sdk-20.0.1" recursive="false" type="SOURCES" />
+  </library>
+</component>
