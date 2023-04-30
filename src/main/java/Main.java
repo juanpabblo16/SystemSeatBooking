@@ -1,8 +1,17 @@
-package ui;
+/**import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+ import static javafx.application.Application.launch;
+*/
+
 
 import model.BookingSystem;
 import model.SeatType;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -11,8 +20,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-public class Main {
+
+
+public class Main /**extends Application*/ {
     public static void main(String[] args) {
+        //launch(args);
         Map<String, Boolean> firstClass = new HashMap<>();
         Map<String, Boolean> businessClass = new HashMap<>();
         Map<String, PriorityQueue<Date>> economyClass = new HashMap<>();
@@ -122,4 +134,16 @@ public class Main {
             }
         }
     }
+
+
+
+
+    /**@Override
+    public void start(@NotNull Stage primaryStage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/views/Home.fxml"));
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
+     */
 }

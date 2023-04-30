@@ -17,7 +17,7 @@ public class BookingSystem {
     public static void bookSeat(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass, Map<String, PriorityQueue<Date>> economyClass, long travelDate, String seatNumber, SeatType seatClass) {
         // Check if seat is already booked
         boolean found = false;
-        if (seatClass == SeatType.FIRST_CLASS && firstClass.containsKey(seatNumber) && !firstClass.get(seatNumber)) {
+        if ((seatClass == SeatType.FIRST_CLASS) && firstClass.containsKey(seatNumber) && !firstClass.get(seatNumber)) {
             found = true;
         } else if (seatClass == SeatType.BUSINESS_CLASS && businessClass.containsKey(seatNumber) && !businessClass.get(seatNumber)) {
             found = true;
@@ -166,7 +166,7 @@ public class BookingSystem {
 
 
     // Helper method to remove a booking from a passenger's list of bookings
-    private void removeBookingFromPassenger(Booking booking) {
+    private void removeBookingFromPassenger( Booking booking) {
         Passenger passenger = passengerMap.get(booking.getPassengerId());
         if (passenger != null) {
             passenger.getBookings().remove(booking);

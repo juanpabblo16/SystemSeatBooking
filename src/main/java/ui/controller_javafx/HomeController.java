@@ -1,12 +1,16 @@
-package ui.controller_javafx;
+package main.java.ui.controller_javafx;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class HomeController extends Application {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class HomeController implements Initializable {
 
     @FXML
     private Button BtnBook_Seat;
@@ -41,7 +45,7 @@ public class HomeController extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 }
