@@ -1,16 +1,18 @@
 package model;
 
 
+import struture.MyHashMap;
+
 import java.util.*;
 
 // model.BookingSystem class to manage the bookings using hash tables
 public class BookingSystem {
-    private HashMap<String, Seat> seatMap;
-    private HashMap<Integer, Passenger> passengerMap;
+    private MyHashMap<String, Seat> seatMap;
+    private MyHashMap<Integer, Passenger> passengerMap;
 
     public BookingSystem() {
-        this.seatMap = new HashMap<String, Seat>();
-        this.passengerMap = new HashMap<Integer, Passenger>();
+        this.seatMap = new MyHashMap<String, Seat>();
+        this.passengerMap = new MyHashMap<Integer, Passenger>();
     }
 
     // Method to book a seat for a passenger

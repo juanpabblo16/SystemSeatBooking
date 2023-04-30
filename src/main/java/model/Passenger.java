@@ -7,7 +7,7 @@ import java.util.LinkedList;
 // model.Passenger class to store a linked list of bookings for a passenger
 public class Passenger {
     private int passengerId;
-    private LinkedList<Booking> bookings;
+    private MyLinkedList<Booking> bookings;
 
     public Passenger(int passengerId) {
         this.passengerId = passengerId;
