@@ -87,7 +87,7 @@ public class Main {
                         // Cancel the booking
                         System.out.println("Enter the user id:");
                         String passengerId = scanner.next();
-                        boolean cancellationResult = BookingSystem.cancelBooking(firstClass, businessClass, economyClass, passengerId, cancelSeatClass + cancelSeatNumber);
+                        boolean cancellationResult = BookingSystem.cancelBooking(firstClass, businessClass, economyClass, Integer.parseInt(passengerId), cancelSeatClass + cancelSeatNumber);
 
                         if (cancellationResult) {
                             System.out.println("Booking cancelled!");

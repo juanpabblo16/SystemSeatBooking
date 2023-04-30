@@ -1,8 +1,6 @@
 package model;
 
 
-import model.Booking;
-
 import java.util.*;
 
 // model.BookingSystem class to manage the bookings using hash tables
@@ -119,7 +117,52 @@ public class BookingSystem {
 
 
     // Method to cancel a booking for a passenger
-    
+    public static boolean cancelBooking(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
+                                        Map<String, PriorityQueue<Date>> economyClass, int passengerId, String seat) {
+        // Check if seat exists and is booked by the passenger
+        boolean found = false;
+        if (seat.charAt(0) == '1' && !firstClass.containsKey(seat)) {
+            System.out.println("Cancellation failed: model.Seat " + seat + " does not exist");
+        } else if (seat.charAt(0) == '2' && !businessClass.containsKey(seat)) {
+            System.out.println("Cancellation failed: model.Seat " + seat + " does not exist");
+        } else if (seat.charAt(0) == '3' && !economyClass.containsKey(seat)) {
+            System.out.println("Cancellation failed: model.Seat " + seat + " does not exist");
+        } else {
+            if (seat.charAt(0) == '1' && firstClass.get(seat)) {
+                System.out.println("Cancellation failed: model.Seat " + seat + " is not booked");
+            } else if (seat.charAt(0) == '2' && businessClass.get(seat)) {
+                System.out.println("Cancellation failed: model.Seat " + seat + " is not booked");
+            } else if (seat.charAt(0) == '3' && economyClass.get(seat).isEmpty()) {
+                System.out.println("Cancellation failed: model.Seat " + seat + " is not booked");
+            } else {
+                // Cancel the booking
+                if (seat.charAt(0) == '1') {
+                    firstClass.put(seat, true);
+                } else if (seat.charAt(0) == '2') {
+                    businessClass.put(seat, true);
+                } else if (seat.charAt(0) == '3') {
+                    PriorityQueue<Date> dates = economyClass.get(seat);
+                    Iterator<Date> iterator = dates.iterator();
+                    while (iterator.hasNext()) {
+                        Date next = iterator.next();
+                        if (next.getTime() == passengerId) {
+                            iterator.remove();
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        System.out.println("Cancellation failed: model.Passenger " + passengerId + " did not book seat " + seat);
+                    }
+                }
+                if (found) {
+                    // Print confirmation message
+                    System.out.println("model.Booking cancelled for passenger " + passengerId + " on seat " + seat);
+                }
+            }
+        }
+        return found;
+    }
 
 
     // Helper method to remove a booking from a passenger's list of bookings
