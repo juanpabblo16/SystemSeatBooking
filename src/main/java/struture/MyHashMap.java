@@ -1,4 +1,5 @@
-package structure;
+package struture;
+
 
 import static java.util.Objects.hash;
 
@@ -118,46 +119,23 @@ public class MyHashMap<K, V> {
         }
         return null;
     }
-
     @SuppressWarnings("unchecked")
     private void resize() {
         capacity *= 2;
         Entry<K, V>[] oldTable = table;
         table = (Entry<K, V>[]) new Entry[capacity];
-        for (int i = 0; i < oldTable.length; i++) {
-            Entry<K, V> entry = oldTable[i];
-            while (entry != null) {
-                K key = entry.key;
-                V value = entry.value;
+        size = 0;
+        for (Entry<K, V> oldEntry : oldTable) {
+            while (oldEntry != null) {
+                K key = oldEntry.key;
+                V value = oldEntry.value;
                 int index = hash(key);
                 Entry<K, V> newEntry = new Entry<>(key, value, table[index]);
                 table[index] = newEntry;
-                entry = entry.next;
+                oldEntry = oldEntry.next;
+                size++;
             }
         }
     }
 
-        private int hash(K key) {
-            return Math.abs(key.hashCode()) % capacity;
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{");
-            for (int i = 0; i < capacity; i++) {
-                Entry<K, V> entry = table[i];
-                while (entry != null) {
-                    sb.append(entry.key);
-                    sb.append("=");
-                    sb.append(entry.value);
-                    if (entry.next != null) {
-                        sb.append(", ");
-                    }
-                    entry = entry.next;
-                }
-            }
-            sb.append("}");
-            return sb.toString();
-        }
-    }
+}
