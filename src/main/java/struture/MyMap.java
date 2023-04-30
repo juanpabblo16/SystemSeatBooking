@@ -40,4 +40,52 @@ public class MyMap<K, V> {
     private int getIndex(K key) {
         return key.hashCode() % buckets.length;
     }
+
+    public V get(K key) {
+        int index = getIndex(key);
+        Node<K, V> node = buckets[index];
+        while (node != null) {
+            if (node.key.equals(key)) {
+                return node.value;
+            }
+            node = node.next;
+        }
+        return null;
+    }
+
+    public boolean containsKey(K key) {
+        int index = getIndex(key);
+        Node<K, V> node = buckets[index];
+        while (node != null) {
+            if (node.key.equals(key)) {
+                return true;
+            }
+            node = node.next;
+        }
+        return false;
+    }
+
+    public boolean remove(K key) {
+        int index = getIndex(key);
+        Node<K, V> prev = null;
+        Node<K, V> node = buckets[index];
+        while (node != null) {
+            if (node.key.equals(key)) {
+                if (prev == null) {
+                    buckets[index] = node.next;
+                } else {
+                    prev.next = node.next;
+                }
+                size--;
+                return true;
+            }
+            prev = node;
+            node = node.next;
+        }
+        return false;
+    }
+
+    public int size() {
+        return size;
+    }
 }
