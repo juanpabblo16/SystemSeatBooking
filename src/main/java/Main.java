@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import model.BookingSystem;
 import model.SeatType;
 import org.jetbrains.annotations.NotNull;
+import struture.MyHashMap;
+import struture.MyMap;
 
 import java.io.IOException;
 import java.util.*;
@@ -25,9 +27,9 @@ import java.util.PriorityQueue;
 public class Main /**extends Application*/ {
     public static void main(String[] args) {
         //launch(args);
-        Map<String, Boolean> firstClass = new HashMap<>();
-        Map<String, Boolean> businessClass = new HashMap<>();
-        Map<String, PriorityQueue<Date>> economyClass = new HashMap<>();
+        Map<String, Boolean> firstClass = (Map<String, Boolean>) new MyHashMap<>();
+        Map<String, Boolean> businessClass = (Map<String, Boolean>) new MyHashMap<>();
+        Map<String, PriorityQueue<Date>> economyClass = (Map<String, PriorityQueue<Date>>) new MyHashMap<>();
         BookingSystem.initializeSeats(firstClass, businessClass, economyClass);
 
         Scanner scanner = new Scanner(System.in);
@@ -68,11 +70,11 @@ public class Main /**extends Application*/ {
 
                         // Book the seat
                         if (seatClass == SeatType.FIRST_CLASS) {
-                            model.BookingSystem.bookSeat(firstClass, null, null, new Date(travelDate).getTime(), seatNumber, seatClass);
+                            model.BookingSystem.bookSeat((MyMap<String, Boolean>) firstClass, null, null, new Date(travelDate).getTime(), seatNumber, seatClass);
                         } else if (seatClass == SeatType.BUSINESS_CLASS) {
-                            model.BookingSystem.bookSeat(null, businessClass, null, new Date(travelDate).getTime(), seatNumber, seatClass);
+                            model.BookingSystem.bookSeat((MyMap<String, Boolean>) null, (MyMap<String, Boolean>) businessClass, null, new Date(travelDate).getTime(), seatNumber, seatClass);
                         } else if (seatClass == SeatType.ECONOMY_CLASS) {
-                            model.BookingSystem.bookSeat(null, null, economyClass, new Date(travelDate).getTime(), seatNumber, seatClass);
+                            model.BookingSystem.bookSeat((MyMap<String, Boolean>) null, (MyMap<String, Boolean>) null, (Map<String, PriorityQueue<Date>>) economyClass, new Date(travelDate).getTime(), seatNumber, seatClass);
                         }
                         System.out.println("Seat booked for " + passengerName + "!");
 

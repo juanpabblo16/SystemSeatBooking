@@ -2,6 +2,8 @@ package model;
 
 
 
+import struture.MyLinkedList;
+
 import java.util.LinkedList;
 
 // model.Passenger class to store a linked list of bookings for a passenger
@@ -11,14 +13,14 @@ public class Passenger {
 
     public Passenger(int passengerId) {
         this.passengerId = passengerId;
-        this.bookings = new LinkedList<Booking>();
+        this.bookings = new MyLinkedList<Booking>();
     }
 
     public int getPassengerId() {
         return passengerId;
     }
 
-    public LinkedList<Booking> getBookings() {
+    public MyLinkedList<Booking> getBookings() {
         return bookings;
     }
 }

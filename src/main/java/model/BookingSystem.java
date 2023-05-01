@@ -1,7 +1,10 @@
 package model;
 
 
+import org.jetbrains.annotations.NotNull;
 import struture.MyHashMap;
+import struture.MyMap;
+import struture.MyPriorityQueue;
 
 import java.util.*;
 
@@ -16,10 +19,10 @@ public class BookingSystem {
     }
 
     // Method to book a seat for a passenger
-    public static void bookSeat(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass, Map<String, PriorityQueue<Date>> economyClass, long travelDate, String seatNumber, SeatType seatClass) {
+    public static void bookSeat(MyMap<String, Boolean> firstClass, MyMap<String, Boolean> businessClass, Map<String, PriorityQueue<Date>> economyClass, long travelDate, String seatNumber, SeatType seatClass) {
         // Check if seat is already booked
         boolean found = false;
-        if ((seatClass == SeatType.FIRST_CLASS) && firstClass.containsKey(seatNumber) && !firstClass.get(seatNumber)) {
+        if (seatClass == SeatType.FIRST_CLASS && firstClass.containsKey(seatNumber) && !firstClass.get(seatNumber)) {
             found = true;
         } else if (seatClass == SeatType.BUSINESS_CLASS && businessClass.containsKey(seatNumber) && !businessClass.get(seatNumber)) {
             found = true;
@@ -44,7 +47,7 @@ public class BookingSystem {
         }
     }
 
-    public static void displayCurrentReservations(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
+    public static void displayCurrentReservations(@NotNull Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
                                                   Map<String, PriorityQueue<Date>> economyClass) {
         // Print header
         System.out.println("CURRENT RESERVATIONS\n");
