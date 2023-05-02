@@ -1,3 +1,5 @@
+### the final version of the code is in the Jhon_Avan branch
+
 
 # Airline Reservation System
 
@@ -24,6 +26,7 @@ The Airline Reservation System allows passengers to book seats on a flight, canc
 
 - Juan Pablo Acevedo
 - Carlos Andres Tafurt
+- Jhon Lamus
 
 ## License
 
