@@ -1,9 +1,11 @@
 import model.BookingSystem;
 import model.SeatType;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import struture.MyHashMap;
 import struture.MyMap;
+import struture.MyPriorityQueue;
 
 
 import java.io.ByteArrayInputStream;
@@ -11,72 +13,70 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
-public class MainTest {
+import static org.junit.Assert.*;
+
+class MainTest {
+
+    private final String newLine = System.lineSeparator();
+    private MyMap<String, Boolean> firstClass;
+    private MyMap<String, Boolean> businessClass;
+    private MyMap<String, MyPriorityQueue<Date>> economyClass;
+
+    @BeforeEach
+    @Test
+    void setUp() {
+        firstClass = new MyMap<>();
+        businessClass = new MyMap<>();
+        economyClass = new MyMap<>();
+        for (int i = 1; i <= 5; i++) {
+            for (char j = 'A'; j <= 'F'; j++) {
+                String seat = i + String.valueOf(j);
+                firstClass.put(seat, true);
+                businessClass.put(seat, true);
+                economyClass.put(seat, new MyPriorityQueue<>());
+            }
+        }
+    }
+
 
 
     @Test
-    public void testBookSeat() {
-        // Initialize seat maps
-        Map<String, Boolean> firstClass = (Map<String, Boolean>) new MyHashMap<>();
-        Map<String, Boolean> businessClass = (Map<String, Boolean>) new MyHashMap<>();
-        Map<String, PriorityQueue<Date>> economyClass = (Map<String, PriorityQueue<Date>>) new MyHashMap<>();
-        BookingSystem.initializeSeats(firstClass, businessClass, economyClass);
+    void testCancelBooking() {
+        BookingSystem.bookSeat(firstClass, null, null, System.currentTimeMillis(), "1A", SeatType.FIRST_CLASS);
+        String input = "2" + newLine + "1" + newLine + "1A" + newLine + "1" + newLine + "4" + newLine;
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        // Set up user input for booking a seat
-        String input = "1\n1\n1A\nJohn Doe\n1658716800000\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        Main.main(new String[]{});
 
-        // Book the seat
-        Main.main(new String[0]);
-
-        // Verify that the seat is no longer available
-        Assertions.assertFalse(firstClass.get("1A"));
+        assertTrue(firstClass.get("1A"));
     }
 
     @Test
-    public void testCancelBooking() {
-        // Initialize seat maps
-        Map<String, Boolean> firstClass = (Map<String, Boolean>) new MyHashMap<>();
-        Map<String, Boolean> businessClass = (Map<String, Boolean>) new MyHashMap<>();
-        Map<String, PriorityQueue<Date>> economyClass = (Map<String, PriorityQueue<Date>>) new MyHashMap<>();
-        BookingSystem.initializeSeats(firstClass, businessClass, economyClass);
+    void testDisplayCurrentReservations() {
+        BookingSystem.bookSeat(firstClass, null, null, System.currentTimeMillis(), "1A", SeatType.FIRST_CLASS);
+        BookingSystem.bookSeat(null, businessClass, null, System.currentTimeMillis(), "1B", SeatType.BUSINESS_CLASS);
+        BookingSystem.bookSeat(null, null, (Map<String, PriorityQueue<Date>>) economyClass, System.currentTimeMillis(), "1C", SeatType.ECONOMY_CLASS);
 
-        // Book a seat
-        model.BookingSystem.bookSeat((MyMap<String, Boolean>) firstClass, null, null, new Date().getTime(), "1A", SeatType.FIRST_CLASS);
+        String expectedOutput = "First Class: [1A]" + newLine +
+                "Business Class: [1B]" + newLine +
+                "Economy Class: {1C=[]}" + newLine;
 
-        // Set up user input for cancelling the booking
-        String input = "2\n1\n1A\n1\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        String input = "3" + newLine + "4" + newLine;
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        // Cancel the booking
-        Main.main(new String[0]);
+        Main.main(new String[]{});
 
-        // Verify that the seat is now available
-        Assertions.assertTrue(firstClass.get("1A"));
+        assertEquals(expectedOutput, getConsoleOutput());
     }
 
-    @Test
-    public void testDisplayCurrentReservations() {
-        // Initialize seat maps
-        Map<String, Boolean> firstClass = (Map<String, Boolean>) new MyHashMap<>();
-        Map<String, Boolean> businessClass = (Map<String, Boolean>) new MyHashMap<>();
-        Map<String, PriorityQueue<Date>> economyClass = (Map<String, PriorityQueue<Date>>) new MyHashMap<>();
-        BookingSystem.initializeSeats(firstClass, businessClass, economyClass);
-
-        // Book a seat
-        model.BookingSystem.bookSeat((MyMap<String, Boolean>) firstClass, null, null, new Date().getTime(), "1A", SeatType.FIRST_CLASS);
-
-        // Set up user input for displaying current reservations
-        String input = "3\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        // Display current reservations
-        Main.main(new String[0]);
-
-
+    private String getConsoleOutput() {
+        Scanner scanner = new Scanner((Readable) System.out);
+        StringBuilder sb = new StringBuilder();
+        while (scanner.hasNextLine()) {
+            sb.append(scanner.nextLine()).append(newLine);
+        }
+        return sb.toString();
     }
 }

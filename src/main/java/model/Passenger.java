@@ -23,6 +23,14 @@ public class Passenger {
     public MyLinkedList<Booking> getBookings() {
         return bookings;
     }
+
+    public void setPassengerId(int passengerId) {
+        this.passengerId = passengerId;
+    }
+
+    public void setBookings(MyLinkedList<Booking> bookings) {
+        this.bookings = bookings;
+    }
 }
 
 

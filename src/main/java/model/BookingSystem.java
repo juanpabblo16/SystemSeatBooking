@@ -47,6 +47,7 @@ public class BookingSystem {
         }
     }
 
+
     public static void displayCurrentReservations(@NotNull MyMap<String, Boolean> firstClass, MyMap<String, Boolean> businessClass,
                                                   MyMap<String, MyPriorityQueue<Date>> economyClass) {
         // Print header
