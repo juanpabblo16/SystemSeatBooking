@@ -5,12 +5,17 @@ import java.util.Date;
 
 public class MyPriorityQueue<E> {
 
+    private static final long serialVersionUID = -7720805057305804111L;
+
     private final Comparator<E> comparator;
     private int size;
     private E[] elements;
 
     private static final int DEFAULT_CAPACITY = 16;
 
+    public MyPriorityQueue() {
+        this(DEFAULT_CAPACITY, null);
+    }
     public MyPriorityQueue(Comparator<E> comparator) {
         this.comparator = comparator;
         this.elements = (E[]) new Object[DEFAULT_CAPACITY];
@@ -103,6 +108,27 @@ public class MyPriorityQueue<E> {
         elements[index] = element;
     }
 
+
+    public boolean remove(E element) {
+        if (element == null) {
+            return false;
+        }
+        for (int i = 0; i < size; i++) {
+            if (elements[i].equals(element)) {
+                elements[i] = elements[--size];
+                elements[size] = null;
+                downHeap(i);
+                return true;
+            }
+        }
+        return false;
+    }
+    public E get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
+        }
+        return elements[index];
+    }
 
 }
 

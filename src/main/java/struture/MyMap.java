@@ -4,6 +4,9 @@ package struture;
 import com.sun.deploy.cache.BaseLocalApplicationProperties;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class MyMap<K, V> {
 
@@ -26,6 +29,15 @@ public class MyMap<K, V> {
     public MyMap() {
         buckets = new Node[16];
         size = 0;
+    }
+
+    public Set<K> keySet() {
+        Set<K> keySet = new HashSet<>();
+        Map.Entry<K, V>[] entries = new Map.Entry[0];
+        for (Map.Entry<K, V> entry : entries) {
+            keySet.add(entry.getKey());
+        }
+        return keySet;
     }
 
     public void put(K key, V value) {

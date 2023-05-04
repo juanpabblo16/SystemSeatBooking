@@ -47,14 +47,13 @@ public class BookingSystem {
         }
     }
 
-    public static void displayCurrentReservations(@NotNull Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
-                                                  Map<String, PriorityQueue<Date>> economyClass) {
+    public static void displayCurrentReservations(@NotNull MyMap<String, Boolean> firstClass, MyMap<String, Boolean> businessClass,
+                                                  MyMap<String, MyPriorityQueue<Date>> economyClass) {
         // Print header
         System.out.println("CURRENT RESERVATIONS\n");
         System.out.println("First Class:");
-        for (Map.Entry<String, Boolean> entry : firstClass.entrySet()) {
-            String seat = entry.getKey();
-            boolean booked = entry.getValue();
+        for (String seat : firstClass.keySet()) {
+            boolean booked = firstClass.get(seat);
             System.out.print(seat + ": ");
             if (booked) {
                 System.out.println("Available");
@@ -63,9 +62,8 @@ public class BookingSystem {
             }
         }
         System.out.println("\nBusiness Class:");
-        for (Map.Entry<String, Boolean> entry : businessClass.entrySet()) {
-            String seat = entry.getKey();
-            boolean booked = entry.getValue();
+        for (String seat : businessClass.keySet()) {
+            boolean booked = businessClass.get(seat);
             System.out.print(seat + ": ");
             if (booked) {
                 System.out.println("Available");
@@ -74,26 +72,24 @@ public class BookingSystem {
             }
         }
         System.out.println("\nEconomy Class:");
-        for (Map.Entry<String, PriorityQueue<Date>> entry : economyClass.entrySet()) {
-            String seat = entry.getKey();
-            PriorityQueue<Date> bookings = entry.getValue();
+        for (String seat : economyClass.keySet()) {
+            MyPriorityQueue<Date> bookings = economyClass.get(seat);
             System.out.print(seat + ": ");
             if (bookings.isEmpty()) {
                 System.out.println("Available");
             } else {
                 System.out.print("Booked by passengers ");
-                Iterator<Date> iterator = bookings.iterator();
-                while (iterator.hasNext()) {
-                    System.out.print(iterator.next().getTime() + " ");
+                for (int i = 0; i < bookings.size(); i++) {
+                    System.out.print(bookings.get(i).getTime() + " ");
                 }
                 System.out.println();
             }
         }
     }
 
-    public static void initializeSeats(Map<String, Boolean> firstClass,
-                                       Map<String, Boolean> businessClass,
-                                       Map<String, PriorityQueue<Date>> economyClass) {
+    public static void initializeSeats(MyMap<String, Boolean> firstClass,
+                                       MyMap<String, Boolean> businessClass,
+                                       MyMap<String, MyPriorityQueue<Date>> economyClass) {
         // First class
         for (int i = 1; i <= 5; i++) {
             for (char j = 'A'; j <= 'F'; j++) {
@@ -114,7 +110,7 @@ public class BookingSystem {
         for (int i = 16; i <= 30; i++) {
             for (char j = 'A'; j <= 'F'; j++) {
                 String seatNumber = i + "" + j;
-                economyClass.put(seatNumber, new PriorityQueue<Date>());
+                economyClass.put(seatNumber, new MyPriorityQueue<Date>());
             }
         }
     }
@@ -122,8 +118,8 @@ public class BookingSystem {
 
 
     // Method to cancel a booking for a passenger
-    public static boolean cancelBooking(Map<String, Boolean> firstClass, Map<String, Boolean> businessClass,
-                                        Map<String, PriorityQueue<Date>> economyClass, int passengerId, String seat) {
+    public static boolean cancelBooking(MyMap<String, Boolean> firstClass, MyMap<String, Boolean> businessClass,
+                                        MyMap<String, MyPriorityQueue<Date>> economyClass, int passengerId, String seat) {
         // Check if seat exists and is booked by the passenger
         boolean found = false;
         if (seat.charAt(0) == '1' && !firstClass.containsKey(seat)) {
@@ -140,18 +136,19 @@ public class BookingSystem {
             } else if (seat.charAt(0) == '3' && economyClass.get(seat).isEmpty()) {
                 System.out.println("Cancellation failed: model.Seat " + seat + " is not booked");
             } else {
+
                 // Cancel the booking
                 if (seat.charAt(0) == '1') {
                     firstClass.put(seat, true);
                 } else if (seat.charAt(0) == '2') {
                     businessClass.put(seat, true);
                 } else if (seat.charAt(0) == '3') {
-                    PriorityQueue<Date> dates = economyClass.get(seat);
-                    Iterator<Date> iterator = dates.iterator();
-                    while (iterator.hasNext()) {
-                        Date next = iterator.next();
-                        if (next.getTime() == passengerId) {
-                            iterator.remove();
+                    System.out.println("No funciona");
+                    /**
+                    MyPriorityQueue<Date> dates = economyClass.get(seat);
+                    for (Date date : new ArrayList<>(dates)) {
+                        if (date.getTime() == passengerId) {
+                            dates.remove(date);
                             found = true;
                             break;
                         }
@@ -159,6 +156,7 @@ public class BookingSystem {
                     if (!found) {
                         System.out.println("Cancellation failed: model.Passenger " + passengerId + " did not book seat " + seat);
                     }
+                     */
                 }
                 if (found) {
                     // Print confirmation message

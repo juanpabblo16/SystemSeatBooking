@@ -12,6 +12,7 @@ import model.SeatType;
 import org.jetbrains.annotations.NotNull;
 import struture.MyHashMap;
 import struture.MyMap;
+import struture.MyPriorityQueue;
 
 import java.io.IOException;
 import java.util.*;
@@ -26,9 +27,9 @@ import java.util.PriorityQueue;
 public class Main /**extends Application*/ {
     public static void main(String[] args) {
         //launch(args);
-        Map<String, Boolean> firstClass = (Map<String, Boolean>) new MyHashMap<>();
-        Map<String, Boolean> businessClass = (Map<String, Boolean>) new MyHashMap<>();
-        Map<String, PriorityQueue<Date>> economyClass = (Map<String, PriorityQueue<Date>>) new MyHashMap<>();
+        MyMap<String, Boolean> firstClass = new MyMap<>();
+        MyMap<String, Boolean> businessClass = new MyMap<>();
+        MyMap<String, MyPriorityQueue<Date>> economyClass =  new MyMap<>();
         BookingSystem.initializeSeats(firstClass, businessClass, economyClass);
 
         Scanner scanner = new Scanner(System.in);
@@ -130,7 +131,7 @@ public class Main /**extends Application*/ {
                 String seat = i + String.valueOf(j);
                 firstClass.put(seat, true);
                 businessClass.put(seat, true);
-                economyClass.put(seat, new PriorityQueue<Date>());
+                economyClass.put(seat, new MyPriorityQueue<Date>());
                 }
             }
         }
