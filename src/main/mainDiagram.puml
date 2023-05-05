@@ -1,0 +1,189 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+@startuml
+
+
+class Booking {
+    -int passengerId
+    -String seatNumber
+    -Date date
+
+    +Booking(passengerId:int, seatNumber:String, date:Date)
+    +getPassengerId():int
+    +getSeatNumber():String
+    +getDate():Date
+}
+
+class BookingSystem{
+- seatMap: MyHashMap<String, Seat>
+- passengerMap: MyHashMap<Integer, Passenger>
++ BookingSystem()
++ bookSeat(firstClass: MyMap<String, Boolean>, businessClass: MyMap<String, Boolean>, economyClass: Map<String, PriorityQueue<Date>>, travelDate: long, seatNumber: String, seatClass: SeatType): void
++ displayCurrentReservations(firstClass: MyMap<String, Boolean>, businessClass: MyMap<String, Boolean>, economyClass: MyMap<String, MyPriorityQueue<Date>>): void
++ initializeSeats(firstClass: MyMap<String, Boolean>, businessClass: MyMap<String, Boolean>, economyClass: MyMap<String, MyPriorityQueue<Date>>): void
++ cancelBooking(firstClass: MyMap<String, Boolean>, businessClass: MyMap<String, Boolean>, economyClass: MyMap<String, MyPriorityQueue<Date>>, passengerId: int, seat: String): boolean
+}
+
+class Passenger {
+  - passengerId: int
+  - bookings: MyLinkedList<Booking>
+
+  + Passenger(passengerId: int)
+  + getPassengerId(): int
+  + getBookings(): MyLinkedList<Booking>
+  + setPassengerId(passengerId: int): void
+  + setBookings(bookings: MyLinkedList<Booking>): void
+}
+
+class Seat {
+    -seatNumber: String
+    -seatType: SeatType
+    -bookings: Object
+    +Seat(seatNumber: String, seatType: SeatType)
+    +getSeatNumber(): String
+    +getSeatType(): SeatType
+    +getBookings(): Object
+}
+
+enum SeatType {
+    FIRST_CLASS
+    ECONOMY
+}
+
+Seat -- SeatType
+enum SeatType {
+    ECONOMY_CLASS,
+    BUSINESS_CLASS,
+    FIRST_CLASS
+}
+Passenger "1" -- "n" Booking
+Seat "1" -- "1..n" Booking
+BookingSystem "1" -- "1" MyHashMap
+BookingSystem "1" -- "1" MyLinkedList
+
+class MyHashMap<K, V> {
+  - DEFAULT_CAPACITY: int = 16
+  - LOAD_FACTOR: float = 0.75f
+  - size: int
+  - capacity: int
+  - table: Entry<K, V>[]
+  + MyHashMap()
+  + MyHashMap(capacity: int)
+  + size(): int
+  + isEmpty(): boolean
+  + containsKey(key: K): boolean
+  + containsValue(value: V): boolean
+  + get(key: K): V
+  + put(key: K, value: V): V
+  + remove(key: K): V
+  - resize(): void
+}
+
+class Entry<K, V> {
+  - key: K
+  - value: V
+  - next: Entry<K, V>
+  + Entry(key: K, value: V, next: Entry<K, V>)
+}
+
+MyHashMap -> Entry : contains >
+
+class MyLinkedList<E> {
+    - size: int
+    - first: Node<E>
+    - last: Node<E>
+    + MyLinkedList()
+    + size(): int
+    + isEmpty(): boolean
+    + addFirst(element: E): void
+    + addLast(element: E): void
+    + removeFirst(): E
+    + removeLast(): E
+    + remove(element: E): boolean
+    + getFirst(): E
+    + getLast(): E
+    + contains(element: E): boolean
+}
+
+class Node<E> {
+    - element: E
+    - next: Node<E>
+    - prev: Node<E>
+    + Node(element: E, next: Node<E>, prev: Node<E>)
+}
+
+MyLinkedList --> Node
+
+class Main {
+    +main(args: String[]): void
+}
+
+class MyMap<K, V> {
+    -buckets: Node<K, V>[]
+    -size: int
+    +MyMap()
+    +keySet(): Set<K>
+    +put(key: K, value: V): void
+    +get(key: K): V
+    +containsKey(key: K): boolean
+    +remove(key: K): boolean
+    +size(): int
+}
+
+class Node<K, V> {
+    -key: K
+    -value: V
+    -next: Node<K, V>
+    +Node(key: K, value: V)
+}
+
+MyMap --> Node
+
+class MyPriorityQueue<E> {
+    - comparator: Comparator<E>
+    - size: int
+    - elements: E[]
+    - DEFAULT_CAPACITY: int = 16
+    + MyPriorityQueue()
+    + MyPriorityQueue(Comparator<E>)
+    + MyPriorityQueue(int, Comparator<E>)
+    + add(E): boolean
+    + peek(): E
+    + poll(): E
+    + isEmpty(): boolean
+    + size(): int
+    - resize(): void
+    - upHeap(int): void
+    - downHeap(int): void
+    + remove(E): boolean
+    + get(int): E
+}
+
+
+
+class BookingSystem {
+    +initializeSeats(firstClass: MyMap<String, Boolean>, businessClass: MyMap<String, Boolean>, economyClass: MyMap<String, MyPriorityQueue<Date>>): void
+    +bookSeat(firstClass: MyMap<String, Boolean>, businessClass: MyMap<String, Boolean>, economyClass: MyMap<String, MyPriorityQueue<Date>>, travelDate: long, seatNumber: String, seatClass: SeatType): void
+    +cancelBooking(firstClass: MyMap<String, Boolean>, businessClass: MyMap<String, Boolean>, economyClass: MyMap<String, MyPriorityQueue<Date>>, passengerId: int, seatNumber: String): boolean
+    +displayCurrentReservations(firstClass: MyMap<String, Boolean>, businessClass: MyMap<String, Boolean>, economyClass: MyMap<String, MyPriorityQueue<Date>>): void
+}
+
+Main --> MyMap
+Main --> MyPriorityQueue
+Main --> BookingSystem
+BookingSystem --> SeatType
+@enduml
+
