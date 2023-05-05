@@ -3,31 +3,21 @@ package struture;
 
 import com.sun.deploy.cache.BaseLocalApplicationProperties;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class MyMap<K, V> {
+
+public class MyMap<K, V>  {
 
 
 
-    private static class Node<K, V> {
-        private final K key;
-        private V value;
-        private Node<K, V> next;
 
-        private Node(K key, V value) {
-            this.key = key;
-            this.value = value;
-        }
-    }
+
 
     private Node<K, V>[] buckets;
     private int size;
 
     public MyMap() {
-        buckets = new Node[16];
+        buckets = new Node[29];
         size = 0;
     }
 
@@ -42,16 +32,9 @@ public class MyMap<K, V> {
 
     public void put(K key, V value) {
         int index = getIndex(key);
-        Node<K, V> node = buckets[index];
-        while (node != null) {
-            if (node.key.equals(key)) {
-                node.value = value;
-                return;
-            }
-            node = node.next;
-        }
-        node = new Node<>(key, value);
-        node.next = buckets[index];
+        Node<K, V> node = new Node<>(key,value);
+
+
         buckets[index] = node;
         size++;
     }
@@ -62,48 +45,38 @@ public class MyMap<K, V> {
     public V get(K key) {
         int index = getIndex(key);
         Node<K, V> node = buckets[index];
-        while (node != null) {
-            if (node.key.equals(key)) {
-                return node.value;
-            }
-            node = node.next;
-        }
-        return null;
+
+        return node.getValue();
     }
+
+
+
 
     public boolean containsKey(K key) {
         int index = getIndex(key);
         Node<K, V> node = buckets[index];
-        while (node != null) {
-            if (node.key.equals(key)) {
-                return true;
-            }
-            node = node.next;
-        }
-        return false;
+
+        return (node == null)? false: true;
     }
 
-    public boolean remove(K key) {
+    public void remove(K key) {
         int index = getIndex(key);
-        Node<K, V> prev = null;
-        Node<K, V> node = buckets[index];
-        while (node != null) {
-            if (node.key.equals(key)) {
-                if (prev == null) {
-                    buckets[index] = node.next;
-                } else {
-                    prev.next = node.next;
-                }
-                size--;
-                return true;
-            }
-            prev = node;
-            node = node.next;
-        }
-        return false;
+        buckets[index] = null;
+        size--;
     }
 
     public int size() {
         return size;
     }
+
+    public String toString(){
+        String items = "";
+        for (Node x: buckets){
+            if (x != null){
+                items += "key = " + x.getKey()+ " value = " + x.getValue()+"\n";
+            }
+        }
+        return items;
+    }
+
 }

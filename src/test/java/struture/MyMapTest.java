@@ -32,9 +32,10 @@ public class MyMapTest {
         map.put("one", 1);
         map.put("two", 2);
         map.put("three", 3);
-        assertTrue(map.remove("two"));
+        map.remove("two");
         assertFalse(map.containsKey("two"));
         assertEquals(2, map.size());
+
     }
 
     @Test

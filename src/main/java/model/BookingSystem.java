@@ -1,7 +1,7 @@
 package model;
 
 
-import org.jetbrains.annotations.NotNull;
+
 import struture.MyHashMap;
 import struture.MyMap;
 import struture.MyPriorityQueue;
@@ -48,44 +48,16 @@ public class BookingSystem {
     }
 
 
-    public static void displayCurrentReservations(@NotNull MyMap<String, Boolean> firstClass, MyMap<String, Boolean> businessClass,
+    public static void displayCurrentReservations( MyMap<String, Boolean> firstClass, MyMap<String, Boolean> businessClass,
                                                   MyMap<String, MyPriorityQueue<Date>> economyClass) {
         // Print header
         System.out.println("CURRENT RESERVATIONS\n");
         System.out.println("First Class:");
-        for (String seat : firstClass.keySet()) {
-            boolean booked = firstClass.get(seat);
-            System.out.print(seat + ": ");
-            if (booked) {
-                System.out.println("Available");
-            } else {
-                System.out.println("Booked");
-            }
-        }
+        System.out.println(firstClass.toString());
         System.out.println("\nBusiness Class:");
-        for (String seat : businessClass.keySet()) {
-            boolean booked = businessClass.get(seat);
-            System.out.print(seat + ": ");
-            if (booked) {
-                System.out.println("Available");
-            } else {
-                System.out.println("Booked");
-            }
-        }
+        System.out.println(businessClass.toString());
         System.out.println("\nEconomy Class:");
-        for (String seat : economyClass.keySet()) {
-            MyPriorityQueue<Date> bookings = economyClass.get(seat);
-            System.out.print(seat + ": ");
-            if (bookings.isEmpty()) {
-                System.out.println("Available");
-            } else {
-                System.out.print("Booked by passengers ");
-                for (int i = 0; i < bookings.size(); i++) {
-                    System.out.print(bookings.get(i).getTime() + " ");
-                }
-                System.out.println();
-            }
-        }
+        System.out.println(economyClass.toString());
     }
 
     public static void initializeSeats(MyMap<String, Boolean> firstClass,
