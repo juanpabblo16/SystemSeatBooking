@@ -24,6 +24,7 @@ The Airline Reservation System allows passengers to book seats on a flight, canc
 
 - Juan Pablo Acevedo
 - Carlos Andres Tafurt
+- Jhon Lemus
 
 ## License
 
